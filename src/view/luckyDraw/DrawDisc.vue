@@ -7,9 +7,17 @@
       v-for="(item, index) in list"
       :key="item.id"
       class="list-item"
-      :class="{'active': index === 4 || index === activeIndex}"
+      :class="{'active': index === 4 || index === activeIndex, 'choujiang': index === 4}"
     >
-      {{item.name}}
+      <span>
+        {{item.name}}
+      </span>
+      <span
+        v-if="index === 4"
+        class="tips"
+      >
+        200矿石/次
+      </span>
     </div>
   </div>
 </template>
@@ -99,12 +107,17 @@ export default {
   text-align: center;
   background-color: #ff6700;
   border-radius: 5px;
+  font-size: 14px;
+  color: #ff9100;
 }
 
 .list-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 130px;
   height: 100px;
-  line-height: 100px;
+  /* line-height: 100px; */
   background-color: #fff;
   border-radius: 5px;
   cursor: pointer;
@@ -113,5 +126,17 @@ export default {
 .active {
   background: #ffe6a6;
   box-shadow: inset 0 0 16px #ffa800;
+}
+
+.choujiang {
+  color: #a74b00;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tips {
+  font-size: 14px;
+  color: #ff9100;
+  font-weight: inherit;
 }
 </style>
