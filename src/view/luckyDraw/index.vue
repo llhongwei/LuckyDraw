@@ -60,7 +60,7 @@ export default {
         }
       ],
       prizeList: [],
-      oreNums: 200
+      oreNums: 3000
     }
   },
   components: {
