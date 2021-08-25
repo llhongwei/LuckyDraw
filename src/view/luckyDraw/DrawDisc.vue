@@ -86,14 +86,16 @@ export default {
         }
       })
       p1.then(() => {
-        this.$alert(`恭喜您抽中${this.list[n].name}`, '', {
-          confirmButtonText: '确定',
-          callback: () => {
-            this.isAnimation = false
-            this.activeIndex = -1
-            this.$emit('drawResult', this.list[n])
-          }
-        });
+        setTimeout(() => {
+          this.$alert(`恭喜您抽中${this.list[n].name}`, '', {
+            confirmButtonText: '确定',
+            callback: () => {
+              this.isAnimation = false
+              this.activeIndex = -1
+              this.$emit('drawResult', this.list[n])
+            }
+          });
+        }, 300)
       })
     }
   }
