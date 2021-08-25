@@ -34,32 +34,18 @@ export default {
     }
   },
   methods: {
-    start(event) {
+    async start(event) {
       if (event.target.innerText === '抽奖' && !this.isAnimation) {
         if (this.oreNums >= 200) {
           this.isAnimation = true
-          const num = parseInt(Math.random() * 1000000)
           // console.log(num)
           let prize = -1
-          if (num <= 2) {
-            prize = 8
-          } else if (2 < num && num <= 8) {
-            prize = 7
-          } else if (8 < num && num <= 38) {
-            prize = 1
-          } else if (38 < num && num <= 68) {
-            prize = 2
-          } else if (68 < num && num <= 98) {
-            prize = 5
-          } else if (98 < num && num <= 128) {
-            prize = 6
-          } else if (128 < num && num <= 600000) {
-            prize = 0
-          } else if (600000 < num && num <= 1000000) {
-            prize = 3
-          }
+          await this.$axios.get('https://qc6nzx.fn.thelarkcloud.com/lottery')
+              .then(function (response) {
+                prize = response.data.idx;
+              })
           this.$emit('drawSuccess')
-          this.startanimation(prize)
+          this.startAnimation(prize)
         } else {
           this.$alert('当前矿石不足', '友情提示', {
             confirmButtonText: '确定'
@@ -67,7 +53,7 @@ export default {
         }
       }
     },
-    startanimation(n) {
+    startAnimation(n) {
       let frame = 32 + this.indexArr.indexOf(n)
       const p1 = new Promise(resolve => {
         for (let i = 0; i <= frame; i++) {
