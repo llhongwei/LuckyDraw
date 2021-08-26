@@ -9,6 +9,11 @@
       class="list-item"
       :class="{'active': index === 4 || index === activeIndex, 'choujiang': index === 4}"
     >
+      <img
+        :src="item.url"
+        v-if="item.url"
+        class="list-item-img"
+      >
       <span>
         {{item.name}}
       </span>
@@ -144,8 +149,13 @@ export default {
 
 .choujiang {
   color: #a74b00;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
+}
+
+.list-item-img {
+  width: 50px;
+  margin: 0 auto;
 }
 
 .tips {

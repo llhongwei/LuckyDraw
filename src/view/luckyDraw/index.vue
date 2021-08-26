@@ -24,19 +24,23 @@ export default {
       list: [
         {
           id: 'dajshdjad',
-          name: '66矿石'
+          name: '66矿石',
+          url: require('@/assets/kuangshi.png')
         },
         {
           id: 'hgfdjgdsz',
-          name: '随机限量徽章'
+          name: '随机限量徽章',
+          url: require('@/assets/huizhang.png')
         },
         {
           id: 'fsdt435tdhd',
-          name: '新款T恤'
+          name: '新款T恤',
+          url: require('@/assets/txue.png')
         },
         {
           id: 'f7685gefs',
-          name: 'Bug'
+          name: 'Bug',
+          url: require('@/assets/bug.png')
         },
         {
           id: 'df25yr634',
@@ -44,19 +48,23 @@ export default {
         },
         {
           id: '32tfthdfs3',
-          name: '乐高海洋巨轮'
+          name: '乐高海洋巨轮',
+          url: require('@/assets/legao.png')
         },
         {
           id: 'akl78414jf',
-          name: '限量桌垫'
+          name: '限量桌垫',
+          url: require('@/assets/zuodian.png')
         },
         {
           id: 're5ytfyh76f',
-          name: 'Yoyo抱枕'
+          name: 'Yoyo抱枕',
+          url: require('@/assets/baozhen.png')
         },
         {
           id: 'gd6363rdyhh',
-          name: '未知'
+          name: '游戏机',
+          url: require('@/assets/youxi.png')
         }
       ],
       prizeList: [],
