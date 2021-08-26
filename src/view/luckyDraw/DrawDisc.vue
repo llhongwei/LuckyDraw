@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { getDrawResult } from '@/network/api.js'
 export default {
   data() {
     return {
@@ -47,18 +48,20 @@ export default {
     }
   },
   methods: {
+    //获取抽奖结果并开始动画
+    async getDrawResult() {
+      const res = await getDrawResult()
+      console.log(res)
+      this.prize = res.data.idx
+      this.$emit('drawSuccess')
+      this.startAnimation(res.data.idx)
+    },
     async start(event) {
       if (event.target.innerText === '抽奖' && !this.isAnimation) {
         if (this.oreNums >= 200) {
           this.isAnimation = true
           // console.log(num)
-          let prize = -1
-          await this.$axios.get('https://qc6nzx.fn.thelarkcloud.com/lottery')
-              .then(function (response) {
-                prize = response.data.idx;
-              })
-          this.$emit('drawSuccess')
-          this.startAnimation(prize)
+          this.getDrawResult()
         } else {
           this.$alert('当前矿石不足', '友情提示', {
             confirmButtonText: '确定'
@@ -91,10 +94,11 @@ export default {
             callback: () => {
               this.isAnimation = false
               this.activeIndex = -1
+              this.prize = -1
               this.$emit('drawResult', this.list[n])
             }
           });
-        }, 300)
+        }, 200)
       })
     }
   }
