@@ -28,8 +28,7 @@
 </template>
 
 <script>
-import {getDrawResult} from '@/network/api.js'
-
+import { getDrawResult } from '@/network/api.js'
 export default {
   data() {
     return {

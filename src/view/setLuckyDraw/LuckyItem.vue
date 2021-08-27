@@ -1,8 +1,8 @@
 <template>
   <div class="lucky-item-container">
-    <div class="lucky-item__name">{{ lname }}</div>
-    <div class="lucky-item__img"><img :src="img" alt=""></div>
-    <div class="lucky-item__weight">{{ weight }}</div>
+    <div class="lucky-item-name">{{ lname }}</div>
+    <div class="lucky-item-img"><img :src="img" alt=""></div>
+    <div class="lucky-item-weight">{{ weight }}</div>
   </div>
 </template>
 
@@ -32,5 +32,8 @@ export default {
 <style scoped>
 .lucky-item-container {
   display: flex;
+}
+.lucky-item-img {
+  flex:
 }
 </style>
