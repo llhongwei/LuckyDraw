@@ -38,9 +38,9 @@ export function getOreNums(data) {
   })
 }
 
-export function updataOreNums(data) {
+export function updateOreNum(data) {
   return request({
-    url: 'updataOreNums',
+    url: 'updateOreNum',
     method: 'post',
     data
   })

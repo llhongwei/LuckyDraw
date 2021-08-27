@@ -18,7 +18,7 @@
 <script>
 import DrawDisc from './DrawDisc.vue';
 import DrawPrize from './DrawPrize.vue';
-import { getDrawList, getOreNums, updataOreNums } from '@/network/api.js';
+import { getDrawList, getOreNums, updateOreNum } from '@/network/api.js';
 export default {
   data() {
     return {
@@ -101,8 +101,8 @@ export default {
       }
     },
     //修改矿石数
-    async updataOreNums(data) {
-      const res = await updataOreNums(data)
+    async updateOreNum(data) {
+      const res = await updateOreNum(data)
       if (res.data.code === 200) {
         this.oreNums = res.data.oreNums
       }
@@ -110,11 +110,11 @@ export default {
     addPrise(item) {
       this.prizeList.push(item)
       if (item.name === '88矿石') {
-        this.updataOreNums({ userName: this.$bus.$data.userName, methods: '+', num: 88 })  //+号代表增加，-号代表减少
+        this.updateOreNum({ userName: this.$bus.$data.userName, methods: '+', num: 88 })  //+号代表增加，-号代表减少
       }
     },
     subOreNums() {
-      this.updataOreNums({ userName: this.$bus.$data.userName, methods: '-', num: 200 })
+      this.updateOreNum({ userName: this.$bus.$data.userName, methods: '-', num: 200 })
     }
   },
   created() {
