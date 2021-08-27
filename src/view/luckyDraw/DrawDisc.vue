@@ -1,25 +1,23 @@
 <template>
-  <div
-      class="draw-disc"
-      @click="start"
-  >
+  <div class="draw-disc">
     <div
-        v-for="(item, index) in list"
-        :key="item.id"
-        class="list-item"
-        :class="{'active': index === 4 || index === activeIndex, 'choujiang': index === 4}"
+      v-for="(item, index) in list"
+      :key="item.id"
+      class="list-item"
+      :class="{'active': index === 4 || index === activeIndex, 'choujiang': index === 4}"
+      @click="start(index)"
     >
       <img
-          :src="item.url"
-          v-if="item.url"
-          class="list-item-img"
+        :src="item.img"
+        v-if="item.img"
+        class="list-item-img"
       >
       <span>
         {{ item.name }}
       </span>
       <span
-          v-if="index === 4"
-          class="tips"
+        v-if="index === 4"
+        class="tips"
       >
         200矿石/次
       </span>
@@ -34,7 +32,8 @@ export default {
     return {
       activeIndex: -1,
       indexArr: [0, 1, 2, 5, 8, 7, 6, 3],
-      isAnimation: false
+      isAnimation: false,
+      prize: -1
     }
   },
   props: {
@@ -51,14 +50,23 @@ export default {
     //获取抽奖结果并开始动画
     async getDrawResult() {
       const res = await getDrawResult()
-      console.log(res)
-      this.prize = res.data.idx
+      // console.log(res)
+      this.prize = this.list.findIndex(item => {
+        return item.id === res.data.idx
+      })
       this.$emit('drawSuccess')
-      this.startAnimation(res.data.idx)
+      this.startAnimation(this.prize)
     },
-    async start(event) {
-      if (event.target.innerText === '抽奖' && !this.isAnimation) {
-        if (this.oreNums >= 200) {
+    start(index) {
+      if (index === 4 && !this.isAnimation) {
+        if (!this.$bus.$data.userName) {
+          this.$alert(`您还为登录，请去登录！`, '提示', {
+            confirmButtonText: '确定',
+            callback: () => {
+              this.$router.push('/login')
+            }
+          });
+        } else if (this.oreNums >= 200) {
           this.isAnimation = true
           // console.log(num)
           this.getDrawResult()
