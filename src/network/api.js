@@ -2,20 +2,19 @@ import request from './request'
 
 // const netWork = 'https://qc6nzx.fn.thelarkcloud.com'
 //                  https://qc6nzx.fn.thelarkcloud.com/getLotteryItem
-function getDrawResult() {
+export function getDrawResult() {
   return request({
     url: `/lottery`,
     method: 'get'
   })
 }
 
-function getDrawList() {
+export function getDrawList() {
   return request({
     url: 'getLotteryItem',
-    method: 'get'
+    method: 'post'
   })
 }
-
 //返回值示例
 /*[ { id: 0,
   name: '坐垫',
@@ -23,5 +22,26 @@ function getDrawList() {
     'https://sf1-ttcdn-tos.pstatp.com/obj/larkcloud-file-storage/baas/qc6nzx/c54f6bafe2e5c1c3_1630037785447.png' }
 ]*/
 
+export function userLogin(data) {
+  return request({
+    url: 'login',
+    method: 'post',
+    data
+  })
+}
 
-export {getDrawResult, getDrawList}
+export function getOreNums(data) {
+  return request({
+    url: 'getOreNums',
+    method: 'post',
+    data
+  })
+}
+
+export function updataOreNums(data) {
+  return request({
+    url: 'updataOreNums',
+    method: 'post',
+    data
+  })
+}
