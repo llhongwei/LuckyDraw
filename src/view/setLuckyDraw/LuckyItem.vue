@@ -1,5 +1,5 @@
 <template>
-  <div class="lucky-item-container">
+  <div class="lucky-item-container" :id="'luckyItem-'+id">
     <div class="lucky-item-name">{{ lname }}</div>
     <div class="lucky-item-img"><img :src="img" alt=""></div>
     <div class="lucky-item-weight">{{ weight }}</div>
@@ -15,7 +15,7 @@ export default {
     },
     img: {
       type: String,
-      default: 'https://sf6-ttcdn-tos.pstatp.com/img/user-avatar/c2f7933898a934f712daced90cd31c2a~300x300.image'
+      default: 'https://sf1-ttcdn-tos.pstatp.com/obj/larkcloud-file-storage/baas/qc6nzx/c54f6bafe2e5c1c3_1630037785447.png'
     },
     weight: {
       type: Number,
