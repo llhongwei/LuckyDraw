@@ -77,6 +77,7 @@ export default {
     DrawPrize
   },
   methods: {
+    //获取奖品列表
     async getDrawList() {
       const res = await getDrawList()
       if (res.status === 200) {
@@ -91,6 +92,7 @@ export default {
       }
       // console.log(this.list)
     },
+    //获取当前用户的矿石数
     async getOreNums(data) {
       const res = await getOreNums(data)
       // console.log(res)
@@ -98,6 +100,7 @@ export default {
         this.oreNums = res.data.oreNums
       }
     },
+    //修改矿石数
     async updataOreNums(data) {
       const res = await updataOreNums(data)
       if (res.data.code === 200) {
@@ -107,7 +110,7 @@ export default {
     addPrise(item) {
       this.prizeList.push(item)
       if (item.name === '88矿石') {
-        this.updataOreNums({ userName: this.$bus.$data.userName, methods: '+', num: 88 })
+        this.updataOreNums({ userName: this.$bus.$data.userName, methods: '+', num: 88 })  //+号代表增加，-号代表减少
       }
     },
     subOreNums() {
@@ -117,7 +120,7 @@ export default {
   created() {
     this.getDrawList()
 
-    if (this.$bus.$data.userName) {
+    if (this.$bus.$data.userName) {  //判断用户有没有登录，登陆了就获取矿石数
       this.getOreNums({ userName: this.$bus.$data.userName })
     }
   }

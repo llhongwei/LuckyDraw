@@ -40,7 +40,7 @@ export default {
         const res = await userLogin({ userName: this.userName, pass: this.pass })
         // console.log(res)
         if (res.data.status === 'success') {
-          this.$bus.$data.userName = this.userName
+          this.$bus.$data.userName = this.userName   //这里只是随便写写，所以就没讲数据保存在cookie里
           this.$bus.$emit('loginSuccess', this.userName)
           this.$router.push('/luckyDraw')
         } else {
