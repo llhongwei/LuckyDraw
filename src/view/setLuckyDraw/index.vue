@@ -26,9 +26,6 @@ inspireCloud.run('uploadFile', formData, {
 });
 
 export default {
-  beforeCreate() {
-    this.getDrawList()
-  },
   data() {
     return {
       list: []

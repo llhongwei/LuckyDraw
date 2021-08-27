@@ -15,6 +15,7 @@ function getDrawList() {
     method: 'get'
   })
 }
+
 //返回值示例
 /*[ { id: 0,
   name: '坐垫',
@@ -23,4 +24,4 @@ function getDrawList() {
 ]*/
 
 
-export { getDrawResult, getDrawList }
+export {getDrawResult, getDrawList}

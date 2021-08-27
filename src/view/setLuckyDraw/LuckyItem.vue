@@ -32,8 +32,15 @@ export default {
 <style scoped>
 .lucky-item-container {
   display: flex;
+  border-bottom: #ccc 1px solid;
 }
-.lucky-item-img {
-  flex:
+
+.lucky-item-container > * {
+  flex: 1;
+  text-align: center;
+}
+
+.lucky-item-img img {
+  width: 100%;
 }
 </style>
