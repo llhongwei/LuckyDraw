@@ -1,16 +1,14 @@
 <template>
   <div id="app">
-    <LuckyDraw />
+    <router-view />
   </div>
 </template>
 
 <script>
-import LuckyDraw from '@/view/luckyDraw/index.vue';
 
 export default {
   name: 'App',
   components: {
-    LuckyDraw
   },
 }
 </script>

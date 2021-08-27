@@ -1,25 +1,25 @@
 <template>
   <div
-    class="draw-disc"
-    @click="start"
+      class="draw-disc"
+      @click="start"
   >
     <div
-      v-for="(item, index) in list"
-      :key="item.id"
-      class="list-item"
-      :class="{'active': index === 4 || index === activeIndex, 'choujiang': index === 4}"
+        v-for="(item, index) in list"
+        :key="item.id"
+        class="list-item"
+        :class="{'active': index === 4 || index === activeIndex, 'choujiang': index === 4}"
     >
       <img
-        :src="item.url"
-        v-if="item.url"
-        class="list-item-img"
+          :src="item.url"
+          v-if="item.url"
+          class="list-item-img"
       >
       <span>
-        {{item.name}}
+        {{ item.name }}
       </span>
       <span
-        v-if="index === 4"
-        class="tips"
+          v-if="index === 4"
+          class="tips"
       >
         200矿石/次
       </span>
@@ -28,7 +28,8 @@
 </template>
 
 <script>
-import { getDrawResult } from '@/network/api.js'
+import {getDrawResult} from '@/network/api.js'
+
 export default {
   data() {
     return {
