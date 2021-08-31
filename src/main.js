@@ -1,18 +1,21 @@
 import Vue from 'vue'
 import App from './App.vue'
 import {
-  MessageBox,
-  Card,
-  Upload,
-  Message,
-  Input,
   Button,
+  Card,
+  Dialog,
   Drawer,
+  Form,
+  FormItem,
+  Input,
+  InputNumber,
+  Loading,
+  Message,
+  MessageBox,
+  Switch,
   Table,
   TableColumn,
-  Switch,
-  Loading,
-  Dialog, Form, FormItem, InputNumber
+  Upload
 } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'

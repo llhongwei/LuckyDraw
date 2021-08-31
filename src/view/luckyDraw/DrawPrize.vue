@@ -1,12 +1,10 @@
 <template>
   <div class="draw-prize innerbox">
     <h3>我的奖品</h3>
-    <p
-      v-for="(item, index) in prizeList"
-      :key="index"
-      class="draw-prize-item"
-    >
-      {{index + 1 + '. ' + item.name}}
+    <p  v-for="(item, index) in prizeList"
+        :key="index"
+        class="draw-prize-item">
+      {{ index + 1 + '. ' + item.name }}
     </p>
   </div>
 </template>
@@ -47,11 +45,13 @@ export default {
   width: 4px;
   height: 4px;
 }
+
 .innerbox::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   background: rgba(0, 0, 0, 0.2);
 }
+
 .innerbox::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 5px rgba(255, 247, 232, 0.3);
   border-radius: 0;

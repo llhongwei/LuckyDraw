@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="top-bar">
-      <h1 class="title" @click="goLottery" title="点我可以回到抽奖页">抽奖</h1>
+      <h1 class="title" title="点我可以回到抽奖页" @click="goLottery">抽奖</h1>
       <div>
         <el-button
             class="message"

@@ -48,6 +48,7 @@ export function changeLotteryItemStatus(data) {
     data
   })
 }
+
 // https://qc6nzx.fn.thelarkcloud.com/setLotteryItem
 export function setLotteryItem(data) {
   return request({
@@ -56,6 +57,7 @@ export function setLotteryItem(data) {
     data
   })
 }
+
 // https://qc6nzx.fn.thelarkcloud.com/getLuckyItemCount
 export function getLuckyItemCount() {
   return request({
@@ -63,6 +65,7 @@ export function getLuckyItemCount() {
     method: 'get'
   })
 }
+
 // https://qc6nzx.fn.thelarkcloud.com/updateLotteryItem
 export function updateLotteryItem(data) {
   return request({
@@ -71,6 +74,7 @@ export function updateLotteryItem(data) {
     data
   })
 }
+
 // https://qc6nzx.fn.thelarkcloud.com/deleteLotteryItem
 export function deleteLotteryItem(data) {
   return request({

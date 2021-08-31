@@ -6,23 +6,23 @@
       <el-button size="mini" @click="changeSelectionEnable(false)">禁用选中</el-button>
       <el-button size="mini" @click="changeSelectionEnable(true)">启用选中</el-button>
     </div>
-    <el-table :data="list" @selection-change="handleSelectionChange"
-              max-height="750"
-              v-loading="loading"
+    <el-table v-loading="loading" :data="list"
+              element-loading-spinner="el-icon-loading"
               element-loading-text="拼命加载中"
-              element-loading-spinner="el-icon-loading">
+              max-height="750"
+              @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="name" label="物品名称"></el-table-column>
-      <el-table-column label="缩略图" align="center" width="100">
+      <el-table-column label="物品名称" prop="name"></el-table-column>
+      <el-table-column align="center" label="缩略图" width="100">
         <template slot-scope="scope">
           <img :src="scope.row.imgUrl" alt="" style="width: 50%">
         </template>
       </el-table-column>
-      <el-table-column prop="weight" label="权重" width="60"></el-table-column>
-      <el-table-column label="操作" align="center">
+      <el-table-column label="权重" prop="weight" width="60"></el-table-column>
+      <el-table-column align="center" label="操作">
         <template slot-scope="scope">
-          <el-switch v-model="scope.row.enable" @change="changeItemEnable(scope.row)"
-                     style="margin-right: 10px;"></el-switch>
+          <el-switch v-model="scope.row.enable" style="margin-right: 10px;"
+                     @change="changeItemEnable(scope.row)"></el-switch>
           <el-button
               size="mini"
               @click="editItem(scope.row)">编辑
@@ -30,23 +30,24 @@
           <el-button
               size="mini"
               type="danger"
-          @click="deleteItem(scope.row.id)">删除
+              @click="deleteItem(scope.row.id)">删除
           </el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog :visible.sync="formDisplay" :title="form.dialogTitle" width="20%" :destroy-on-close="true">
+    <el-dialog :destroy-on-close="true" :title="form.dialogTitle" :visible.sync="formDisplay" width="20%">
       <el-form :model="form" label-position="left">
         <el-form-item label="名称">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item label="权重">
-          <el-input-number v-model="form.weight" :precision="2" :step="0.01" :min="0.01" :max="1.00"></el-input-number>
+          <el-input-number v-model="form.weight" :max="1.00" :min="0.01" :precision="2" :step="0.01"></el-input-number>
         </el-form-item>
         <el-form-item label="图标">
-          <el-upload action="" list-type="picture-card" ref="upload" :file-list="imgList" :limit="1" :multiple="false"
-                     :auto-upload="false" accept="image/*" :on-change="onChange" :show-file-list="false" :on-exceed="onExceed">
-            <img v-if="this.form.img" :src="this.form.img" class="avatar" alt="" width="100%" height="100%">
+          <el-upload ref="upload" :auto-upload="false" :file-list="imgList" :limit="1" :multiple="false" :on-change="onChange"
+                     :on-exceed="onExceed" :show-file-list="false" accept="image/*" action=""
+                     list-type="picture-card">
+            <img v-if="this.form.img" :src="this.form.img" alt="" class="avatar" height="100%" width="100%">
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
@@ -62,7 +63,14 @@
 
 <script>
 import InspireCloud from '@byteinspire/js-sdk'
-import {getDrawList, changeLotteryItemStatus , setLotteryItem, getLuckyItemCount, updateLotteryItem, deleteLotteryItem} from '@/network/api'
+import {
+  changeLotteryItemStatus,
+  deleteLotteryItem,
+  getDrawList,
+  getLuckyItemCount,
+  setLotteryItem,
+  updateLotteryItem
+} from '@/network/api'
 
 export default {
   created() {
@@ -81,7 +89,8 @@ export default {
         weight: 0.01,
         img: undefined,
         id: -1,
-        fun: ()=>{}
+        fun: () => {
+        }
       }
     }
   },
@@ -119,7 +128,7 @@ export default {
         this.formDisplay = false;
         await this.getDrawList();
         this.loading = false;
-      }else {
+      } else {
         await this.$alert('错误！请稍后重试！');
       }
     },
@@ -129,13 +138,13 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
-        const res = await deleteLotteryItem({id :id});
+        const res = await deleteLotteryItem({id: id});
         if (res.status === 200) {
           this.loading = true;
           this.formDisplay = false;
           await this.getDrawList();
           this.loading = false;
-        }else {
+        } else {
           await this.$alert('错误！请稍后重试！');
         }
         this.$message({
@@ -174,7 +183,7 @@ export default {
     async addItem() {
       this.resetForm();
       this.form.dialogTitle = '添加物品';
-      const { data } = await getLuckyItemCount();
+      const {data} = await getLuckyItemCount();
       this.form.id = data.count;
       this.form.fun = this.submitItem;
       this.formDisplay = true;
@@ -190,11 +199,11 @@ export default {
         this.form.img = URL.createObjectURL(file.raw);
       }
     },
-    onExceed(files, fileList){
+    onExceed(files, fileList) {
       this.imgList[0] = fileList[0]
       this.onChange(fileList[0])
     },
-    resetForm(){
+    resetForm() {
       this.imgList = [];
       this.form.img = undefined;
       this.form.weight = 0.01;
@@ -214,7 +223,7 @@ export default {
           });
       return imgUrl;
     },
-    async submitItem(){
+    async submitItem() {
       const isBlank = this.form.name === '';
       if (isBlank) {
         await this.$alert('名称不可以为空!');
@@ -234,7 +243,7 @@ export default {
         this.formDisplay = false;
         await this.getDrawList();
         this.loading = false;
-      }else {
+      } else {
         await this.$alert('错误！请稍后重试！');
       }
     }
