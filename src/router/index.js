@@ -20,13 +20,13 @@ const routes = [
         name: 'Login',
         component: () => import('@/view/login/index')
       },
+      {
+        path: '/setLuckyItem',
+        name: 'SetLuckyItem',
+        component: () => import('@/view/setLuckyItem/index')
+      }
     ]
   },
-  {
-    path: '/setLuckyItem',
-    name: 'SetLuckyItem',
-    component: () => import('@/view/setLuckyDraw/index')
-  }
 ]
 
 const router = new VueRouter({

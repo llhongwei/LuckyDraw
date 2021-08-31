@@ -5,12 +5,11 @@
     </div>
     <div class="lucky-draw__main">
       <DrawDisc
-        :list="list"
-        :ore-nums="oreNums"
-        @drawResult="addPrise"
-        @drawSuccess="subOreNums"
-      />
-      <DrawPrize :prizeList="prizeList" />
+          :list="list"
+          :ore-nums="oreNums"
+          @drawResult="addPrise"
+          @drawSuccess="subOreNums"/>
+      <DrawPrize :prizeList="prizeList"/>
     </div>
   </div>
 </template>
@@ -18,56 +17,12 @@
 <script>
 import DrawDisc from './DrawDisc.vue';
 import DrawPrize from './DrawPrize.vue';
-import { getDrawList, getOreNums, updateOreNum } from '@/network/api.js';
+import {getDrawList, getOreNums, updateOreNum} from '@/network/api.js';
+
 export default {
   data() {
     return {
-      list: [
-        // {
-        //   id: 'dajshdjad',
-        //   name: '66矿石',
-        //   url: require('@/assets/kuangshi.png')
-        // },
-        // {
-        //   id: 'hgfdjgdsz',
-        //   name: '随机限量徽章',
-        //   url: require('@/assets/huizhang.png')
-        // },
-        // {
-        //   id: 'fsdt435tdhd',
-        //   name: '新款T恤',
-        //   url: require('@/assets/txue.png')
-        // },
-        // {
-        //   id: 'f7685gefs',
-        //   name: 'Bug',
-        //   url: require('@/assets/bug.png')
-        // },
-        // {
-        //   id: 'df25yr634',
-        //   name: '抽奖'
-        // },
-        // {
-        //   id: '32tfthdfs3',
-        //   name: '乐高海洋巨轮',
-        //   url: require('@/assets/legao.png')
-        // },
-        // {
-        //   id: 'akl78414jf',
-        //   name: '限量桌垫',
-        //   url: require('@/assets/zuodian.png')
-        // },
-        // {
-        //   id: 're5ytfyh76f',
-        //   name: 'Yoyo抱枕',
-        //   url: require('@/assets/baozhen.png')
-        // },
-        // {
-        //   id: 'gd6363rdyhh',
-        //   name: '游戏机',
-        //   url: require('@/assets/youxi.png')
-        // }
-      ],
+      list: [],
       prizeList: [],
       oreNums: 0
     }
@@ -110,18 +65,18 @@ export default {
     addPrise(item) {
       this.prizeList.push(item)
       if (item.name === '88矿石') {
-        this.updateOreNum({ userName: this.$bus.$data.userName, methods: '+', num: 88 })  //+号代表增加，-号代表减少
+        this.updateOreNum({userName: this.$bus.$data.userName, methods: '+', num: 88})  //+号代表增加，-号代表减少
       }
     },
     subOreNums() {
-      this.updateOreNum({ userName: this.$bus.$data.userName, methods: '-', num: 200 })
+      this.updateOreNum({userName: this.$bus.$data.userName, methods: '-', num: 200})
     }
   },
   created() {
     this.getDrawList()
 
     if (this.$bus.$data.userName) {  //判断用户有没有登录，登陆了就获取矿石数
-      this.getOreNums({ userName: this.$bus.$data.userName })
+      this.getOreNums({userName: this.$bus.$data.userName})
     }
   }
 }

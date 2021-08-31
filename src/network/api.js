@@ -15,12 +15,6 @@ export function getDrawList() {
     method: 'post'
   })
 }
-//返回值示例
-/*[ { id: 0,
-  name: '坐垫',
-  img:
-    'https://sf1-ttcdn-tos.pstatp.com/obj/larkcloud-file-storage/baas/qc6nzx/c54f6bafe2e5c1c3_1630037785447.png' }
-]*/
 
 export function userLogin(data) {
   return request({
@@ -41,6 +35,46 @@ export function getOreNums(data) {
 export function updateOreNum(data) {
   return request({
     url: 'updateOreNum',
+    method: 'post',
+    data
+  })
+}
+
+// https://qc6nzx.fn.thelarkcloud.com/changeLotteryItemStatus
+export function changeLotteryItemStatus(data) {
+  return request({
+    url: 'changeLotteryItemStatus',
+    method: 'post',
+    data
+  })
+}
+// https://qc6nzx.fn.thelarkcloud.com/setLotteryItem
+export function setLotteryItem(data) {
+  return request({
+    url: 'setLotteryItem',
+    method: 'post',
+    data
+  })
+}
+// https://qc6nzx.fn.thelarkcloud.com/getLuckyItemCount
+export function getLuckyItemCount() {
+  return request({
+    url: 'getLuckyItemCount',
+    method: 'get'
+  })
+}
+// https://qc6nzx.fn.thelarkcloud.com/updateLotteryItem
+export function updateLotteryItem(data) {
+  return request({
+    url: 'updateLotteryItem',
+    method: 'post',
+    data
+  })
+}
+// https://qc6nzx.fn.thelarkcloud.com/deleteLotteryItem
+export function deleteLotteryItem(data) {
+  return request({
+    url: 'deleteLotteryItem',
     method: 'post',
     data
   })

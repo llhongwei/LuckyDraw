@@ -8,8 +8,8 @@
       @click="start(index)"
     >
       <img
-        :src="item.img"
-        v-if="item.img"
+        :src="item.imgUrl"
+        v-if="item.imgUrl"
         class="list-item-img"
        alt="img">
       <span>

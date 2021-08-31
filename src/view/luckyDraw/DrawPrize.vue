@@ -24,6 +24,7 @@ export default {
 
 <style scoped>
 .draw-prize {
+  border-radius: 5px;
   width: 400px;
   height: 345px;
   background-color: rgba(255, 247, 232, 0.3);
