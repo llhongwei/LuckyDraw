@@ -1,21 +1,23 @@
 import request from './request'
 
-// const netWork = 'https://qc6nzx.fn.thelarkcloud.com'
-//                  https://qc6nzx.fn.thelarkcloud.com/getLotteryItem
+// https://qc6nzx.fn.thelarkcloud.com/lottery
 export function getDrawResult() {
   return request({
-    url: `/lottery`,
+    url: `lottery`,
     method: 'get'
   })
 }
 
-export function getDrawList() {
+// https://qc6nzx.fn.thelarkcloud.com/getLotteryItem
+export function getDrawList(data) {
   return request({
     url: 'getLotteryItem',
-    method: 'post'
+    method: 'post',
+    data
   })
 }
 
+// https://qc6nzx.fn.thelarkcloud.com/login
 export function userLogin(data) {
   return request({
     url: 'login',
@@ -24,6 +26,7 @@ export function userLogin(data) {
   })
 }
 
+// https://qc6nzx.fn.thelarkcloud.com/getOreNums
 export function getOreNums(data) {
   return request({
     url: 'getOreNums',
@@ -32,6 +35,7 @@ export function getOreNums(data) {
   })
 }
 
+// // https://qc6nzx.fn.thelarkcloud.com/updateOreNum
 export function updateOreNum(data) {
   return request({
     url: 'updateOreNum',
