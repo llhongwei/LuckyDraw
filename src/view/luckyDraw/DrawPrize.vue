@@ -1,9 +1,9 @@
 <template>
   <div class="draw-prize innerbox">
     <h3>我的奖品</h3>
-    <p  v-for="(item, index) in prizeList"
-        :key="index"
-        class="draw-prize-item">
+    <p v-for="(item, index) in prizeList"
+       :key="index"
+       class="draw-prize-item">
       {{ index + 1 + '. ' + item.name }}
     </p>
   </div>
@@ -17,7 +17,7 @@ export default {
       default: () => []
     }
   }
-}
+};
 </script>
 
 <style scoped>

@@ -1,14 +1,17 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 import TopBar from '@/view/TopBar/index.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
     component: TopBar,
     redirect: '/luckyDraw',
+    meta: {
+      title: '抽奖小Demo',
+    },
     children: [
       {
         path: '/luckyDraw',
@@ -27,10 +30,10 @@ const routes = [
       }
     ]
   },
-]
+];
 
 const router = new VueRouter({
   routes
-})
+});
 
-export default router
+export default router;

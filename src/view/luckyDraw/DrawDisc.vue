@@ -1,41 +1,35 @@
 <template>
   <div class="draw-disc">
-    <div
-        v-for="(item, index) in list"
-        :key="item.id"
-        :class="{'active': index === 4 || index === activeIndex, 'choujiang': index === 4}"
-        class="list-item"
-        @click="start(index)"
-    >
-      <img
-          v-if="item.imgUrl"
-          :src="item.imgUrl"
-          alt="img"
-          class="list-item-img">
-      <span>
-        {{ item.name }}
-      </span>
-      <span
-          v-if="index === 4"
-          class="tips"
-      >
-        200矿石/次
+    <div v-for="(item, index) in list"
+         :key="item.id"
+         :class="{'active': index === activeIndex}"
+         class="list-item">
+      <img v-if="item.imgUrl"
+           :src="item.imgUrl"
+           alt="img"
+           class="list-item-img">
+      <span>{{ item.name }}</span>
+    </div>
+    <div class="list-item lottery active" @click="start">
+      抽奖
+      <span class="tips">
+        {{ costOre }} 矿石/次
       </span>
     </div>
   </div>
 </template>
 
 <script>
-import {getDrawResult} from '@/network/api.js'
+import {getDrawResult} from '@/network/api.js';
 
 export default {
   data() {
     return {
       activeIndex: -1,
-      indexArr: [0, 1, 2, 5, 8, 7, 6, 3],
+      indexArr: [0, 1, 2, 4, 7, 6, 5, 3],
       isAnimation: false,
-      prize: -1
-    }
+      prize: -1,
+    };
   },
   props: {
     list: {
@@ -45,32 +39,36 @@ export default {
     oreNums: {
       type: Number,
       default: 0
+    },
+    costOre: {
+      type: Number,
+      default: 200
     }
   },
   methods: {
     //获取抽奖结果并开始动画
     async getDrawResult() {
-      const res = await getDrawResult()
+      const res = await getDrawResult();
       // console.log(res)
       this.prize = this.list.findIndex(item => {
-        return item.id === res.data.idx
-      })
-      this.$emit('drawSuccess')
-      this.startAnimation(this.prize)
+        return item.id === res.data.idx;
+      });
+      this.$emit('drawSuccess');
+      this.startAnimation(this.prize);
     },
-    start(index) {
-      if (index === 4 && !this.isAnimation) {
+    start() {
+      if (!this.isAnimation) {
         if (!this.$bus.$data.userName) {
           this.$alert(`您还为登录，请去登录！`, '提示', {
             confirmButtonText: '确定',
             callback: () => {
-              this.$router.push('/login')
+              this.$router.push('/login');
             }
           });
         } else if (this.oreNums >= 200) {
-          this.isAnimation = true
+          this.isAnimation = true;
           // console.log(num)
-          this.getDrawResult()
+          this.getDrawResult();
         } else {
           this.$alert('当前矿石不足', '友情提示', {
             confirmButtonText: '确定'
@@ -79,43 +77,44 @@ export default {
       }
     },
     startAnimation(n) {
-      let frame = 32 + this.indexArr.indexOf(n)
+      let frame = 32 + this.indexArr.indexOf(n);
       const p1 = new Promise(resolve => {
         for (let i = 0; i <= frame; i++) {
           if (i + 3 < frame) {
             setTimeout(() => {
-              this.activeIndex = this.indexArr[i % 8]
-            }, 50 * i)
+              this.activeIndex = this.indexArr[i % 8];
+            }, 50 * i);
           } else {
             setTimeout(() => {
-              this.activeIndex = this.indexArr[i % 8]
+              this.activeIndex = this.indexArr[i % 8];
               if (i === frame) {
-                resolve()
+                resolve();
               }
-            }, i * 50 + (3 + i - frame) ** 2 * 200)
+            }, i * 50 + (3 + i - frame) ** 2 * 200);
           }
         }
-      })
+      });
       p1.then(() => {
         setTimeout(() => {
           this.$alert(`恭喜您抽中${this.list[n].name}`, '', {
             confirmButtonText: '确定',
             callback: () => {
-              this.isAnimation = false
-              this.activeIndex = -1
-              this.prize = -1
-              this.$emit('drawResult', this.list[n])
+              this.isAnimation = false;
+              this.activeIndex = -1;
+              this.prize = -1;
+              this.$emit('drawResult', this.list[n]);
             }
           });
-        }, 200)
-      })
+        }, 200);
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>
 .draw-disc {
+  position: relative;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -127,6 +126,10 @@ export default {
   border-radius: 5px;
   font-size: 14px;
   color: #ff9100;
+}
+
+div.draw-disc > div.list-item:nth-child(5) {
+  margin-left: 145px;
 }
 
 .list-item {
@@ -146,7 +149,11 @@ export default {
   box-shadow: inset 0 0 16px #ffa800;
 }
 
-.choujiang {
+.lottery {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: #a74b00;
   font-size: 24px;
   font-weight: 700;

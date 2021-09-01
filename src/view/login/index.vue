@@ -31,27 +31,27 @@ export default {
       isLogin: true,
       userName: 'admin',
       pass: '123456'
-    }
+    };
   },
   methods: {
     async userLogin() {
       if (this.userName === '' || this.pass === '') {
         this.$message.error('用户名或密码不能为空！');
       } else {
-        const res = await userLogin({userName: this.userName, pass: this.pass})
+        const res = await userLogin({userName: this.userName, pass: this.pass});
         // console.log(res)
         if (res.data.status === 'success') {
-          this.$bus.$data.userName = this.userName
-          sessionStorage.setItem('token', res.data.token)
-          this.$bus.$emit('loginSuccess', this.userName)
-          this.$router.push('/luckyDraw')
+          this.$bus.$data.userName = this.userName;
+          sessionStorage.setItem('token', res.data.token);
+          this.$bus.$emit('loginSuccess', this.userName);
+          this.$router.push('/luckyDraw');
         } else {
-          this.$message.error(res.data.message)
+          this.$message.error(res.data.message);
         }
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>

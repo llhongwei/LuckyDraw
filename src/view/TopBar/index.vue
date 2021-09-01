@@ -9,7 +9,7 @@
           {{ message }}
         </el-button>
         <el-button v-if="this.islogin" @click="goSetLuckyItem">
-          奖品管理
+          抽奖配置
         </el-button>
         <el-button v-if="this.islogin" onclick="sessionStorage.clear();window.location = '/'">
           退出
@@ -28,34 +28,34 @@ export default {
     return {
       message: '登录',
       islogin: false
-    }
+    };
   },
   methods: {
     goLogin() {
       if (!this.islogin && this.$route.name !== 'Login') {
-        this.$router.push('/login')
+        this.$router.push('/login');
       }
     },
     goLottery() {
-      this.$router.push('/luckyDraw')
+      this.$router.push('/luckyDraw');
     },
     goSetLuckyItem() {
       if (this.$route.name !== 'SetLuckyItem') {
-        this.$router.push('/setLuckyItem')
+        this.$router.push('/setLuckyItem');
       }
     }
   },
   created() {
     this.$bus.$on('loginSuccess', (userName) => {
       // console.log(userName)
-      this.message = userName + ' 您好！'
-    })
+      this.message = userName + ' 您好！';
+    });
   },
   updated() {
-    const token = sessionStorage.getItem('token')
-    this.islogin = token !== null
+    const token = sessionStorage.getItem('token');
+    this.islogin = token !== null;
   }
-}
+};
 </script>
 
 <style scoped>
