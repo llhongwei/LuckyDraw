@@ -88,6 +88,15 @@ export default {
     const {data} = await configLotteryCost();
     this.costOre = data.costOre;
   },
+  mounted() {
+    this.$notify({
+      title: '提示',
+      type: 'info',
+      dangerouslyUseHTMLString: true,
+      message: '点击顶部栏&nbsp;<b>抽奖</b>&nbsp;就可以跳回抽奖页啦！',
+      duration: 0
+    })
+  },
   data() {
     return {
       list: [],

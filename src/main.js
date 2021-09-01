@@ -15,7 +15,8 @@ import {
   Switch,
   Table,
   TableColumn,
-  Upload
+  Upload,
+  Notification
 } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios';
@@ -26,6 +27,7 @@ Vue.prototype.$axios = axios;
 Vue.prototype.$alert = MessageBox.alert;
 Vue.prototype.$confirm = MessageBox.confirm;
 Vue.prototype.$message = Message;
+Vue.prototype.$notify = Notification;
 Vue.use(Card);
 Vue.use(Upload);
 Vue.use(Input);
@@ -39,6 +41,7 @@ Vue.use(Loading);
 Vue.use(Dialog);
 Vue.use(Form);
 Vue.use(FormItem);
+
 
 Vue.prototype.$bus = new Vue();
 window.document.title = "抽奖小Demo";
