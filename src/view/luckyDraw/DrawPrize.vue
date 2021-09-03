@@ -1,11 +1,11 @@
 <template>
   <div class="draw-prize innerbox">
     <h3>我的奖品</h3>
-    <p v-for="(item, index) in prizeList"
+    <div v-for="(item, index) in prizeList"
        :key="index"
        class="draw-prize-item">
-      {{ index + 1 + '. ' + item.name }}
-    </p>
+      <div>🎉 恭喜你！抽中&nbsp;<span style="color: #fadd95;">{{ item.name }}</span>&nbsp;</div>
+    </div>
   </div>
 </template>
 

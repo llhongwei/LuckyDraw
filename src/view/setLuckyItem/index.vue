@@ -93,8 +93,7 @@ export default {
       title: '提示',
       type: 'info',
       dangerouslyUseHTMLString: true,
-      message: '点击顶部栏&nbsp;<b>抽奖</b>&nbsp;就可以跳回抽奖页啦！',
-      duration: 0
+      message: '点击顶部栏&nbsp;<b>抽奖</b>&nbsp;就可以跳回抽奖页啦！'
     })
   },
   data() {
@@ -155,6 +154,13 @@ export default {
       }
     },
     async deleteItem(id) {
+      if (id < 8){
+        this.$message({
+          type: 'error',
+          message: '默认物品不能删除！如有需要请禁用！'
+        })
+        return false;
+      }
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
